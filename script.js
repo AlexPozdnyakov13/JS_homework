@@ -1,71 +1,126 @@
 // Задание 1
-// Необходимо с помощью цикла for вывести следующие 11 строк в консоль:
-// 0 – это ноль
-// 1 – нечетное число
-// 2 – четное число
-// 3 – нечетное число
-// …
-// 10 – четное число
+// Дан объект numbers. Необходимо в консоль вывести все значения больше или равные 3.
 
-for (let i = 0; i < 11; i++) {
-    if (i===0) console.log(`${i} - это ноль`);
-    else if (i%2!==0) console.log(`${i} - это нечетное число`);
-    else console.log(`${i} - это четное число`);
+const numbers = {
+keyin1: 1,
+keyin2: 2,
+keyin3: 3,
+keyin4: 4,
+keyin5: 5,
+keyin6: 6,
+keyin7: 7,
 }
+
+for (const key in numbers) {
+    if (numbers[key]>=3) {
+        console.log(numbers[key]); 
+    }
+};
 
 // Задание 2
-// Дан массив [1, 2, 3, 4, 5, 6, 7]
-// Сделайте из этого массива следующий [1, 2, 3, 6, 7]
+// Необходимо из объекта, который лежит в константе post вывести значения, к которым приписан комментарий, в консоль.
 
-const nums = [1, 2, 3, 4, 5, 6, 7]
-nums.splice(3,2);
-console.log(nums);
+const post = {
+author: "John", // вывести этот текст
+postId: 23,
+comments: [
+{
+userId: 10,
+userName: "Alex",
+text: "lorem ipsum",
+rating: {
+likes: 10,
+dislikes: 2, // вывести это число
+},
+},
+{
+userId: 5, // вывести это число
+userName: "Jane",
+text: "lorem ipsum 2", // вывести этот текст
+rating: {
+likes: 3,
+dislikes: 1,
+},
+},
+],
+};
+
+console.log(post.author);
+console.log(post.comments[0].rating.dislikes);
+console.log(post.comments[1].userId);
+console.log(post.comments[1].text);
 
 // Задание 3
-// Используя Math.random() вам необходимо генерировать цифры от 0 до 9, и создать массив состоящий из 5 таких элементов
-// 1. Рассчитать сумму элементов этого массива
-// 2. Найти минимальное число
-// 3. Найти есть ли в этом массиве число 3
+// Дан массив products, необходимо цену каждого продукта уменьшить на 15% используя метод forEach.
 
-const generateArray2 = (length, max) => ([...new Array(length)].map(() => Math.round(Math.random() * max)))
+const products = [
+{
+id: 3,
+price: 200,
+},
+{
+id: 4,
+price: 900,
+},
+{
+id: 1,
+price: 1000,
+},
+];
 
-const nums2 = generateArray2(5,9);
-console.log(nums2);
-let sum = 0;
-for (let i = 0; i < nums2.length; i++) {
-    sum += nums2[i];  
+products.forEach(element => { element.price=element.price*0.85});
+
+for (let i = 0; i < products.length; i++) {
+    console.log(products[i].price);   
 }
-console.log(sum);
 
-let min = nums2[0];
-for (let i = 0; i < nums2.length; i++) {
-    if (nums2[i]<min) min=nums2[i];  
+
+// Задание 4
+// 1. Необходимо вывести в консоль массив продуктов в котором есть хоть одна фотография используя метод filter. Исходные данные - массив products.
+// 2. Необходимо отсортировать массив products используя метод sort по цене, начиная с самой маленькой, заканчивая самой большой ценой, после чего вывести отсортированный массив в консоль.
+
+// ```
+const products2 = [
+{
+id: 3,
+price: 127,
+photos: [
+"1.jpg",
+"2.jpg",
+],
+},
+{
+id: 5,
+price: 499,
+photos: [],
+},
+{
+id: 10,
+price: 26,
+photos: [
+"3.jpg",
+],
+},
+{
+id: 8,
+price: 78,
+},
+];
+
+console.log(products2.filter((value) => value.photos!=null && value.photos!=""));
+
+products2.sort((a,b) => a.price - b.price);
+console.log(products2);
+
+// **Задание 5**
+// Дано 2 массива 
+const en = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const ru = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"];
+// ```
+// Вам необходимо объединить 2 этих массива, чтобы значения первого массива были ключами, а значения второго массива — значениями.
+const array = {};
+for (let i = 0; i < en.length; i++) {
+    array[en[i]] = ru[i]; 
 }
-console.log(min);
 
-let count3 = 0;
-for (let i = 0; i < nums2.length; i++) {
-    if (nums2[i]===3) {
-        count3++;
-    }
-    else continue;
-}
-if (count3>0) console.log('3 имеется');
-else console.log('3 отсутствует');
-
-// *Необязательное задание. *
-// Необходимо вывести горку в консоль (используя цикл for), как показано на рисунке, только у вашей горки должно быть 20 рядов, а не 5:
-
-// x
-// xx
-// xxx
-// xxxx
-// xxxxx
-
-for (let i = 0; i < 20; i++) {
-    let element = '';
-    for (let k = 0; k <= i; k++) {
-        element+='x'
-    }
-    console.log(element);
-}
+console.log(array);
